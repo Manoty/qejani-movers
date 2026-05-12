@@ -5,6 +5,9 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
+
+AUTH_USER_MODEL = "accounts.User"
+
 env = environ.Env()
 environ.Env.read_env(BASE_DIR / ".env")
 
@@ -72,6 +75,7 @@ DATABASES = {
         "PORT": env("DB_PORT", default="5432"),
     }
 }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
