@@ -1,0 +1,38 @@
+/* frontend/src/features/ops/ops.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+.ops-shell {
+  --ops-bg:        #0f1117;
+  --ops-surface:   #181c25;
+  --ops-border:    #252a35;
+  --ops-border-hi: #353b4a;
+  --ops-text:      #e2e8f0;
+  --ops-muted:     #64748b;
+  --ops-amber:     #f59e0b;
+  --ops-amber-dim: rgba(245,158,11,0.12);
+  --ops-green:     #10b981;
+  --ops-green-dim: rgba(16,185,129,0.1);
+  --ops-red:       #ef4444;
+  --ops-red-dim:   rgba(239,68,68,0.1);
+  --ops-blue:      #3b82f6;
+  --ops-blue-dim:  rgba(59,130,246,0.1);
+
+  font-family: 'Syne', sans-serif;
+  background: var(--ops-bg);
+  color: var(--ops-text);
+  min-height: 100vh;
+}
+
+.ops-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+@keyframes ops-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.ops-animate { animation: ops-fade-up 0.35s cubic-bezier(0.4,0,0.2,1) both; }
+.ops-delay-1 { animation-delay: 0.07s; }
+.ops-delay-2 { animation-delay: 0.14s; }
+.ops-delay-3 { animation-delay: 0.21s; }
