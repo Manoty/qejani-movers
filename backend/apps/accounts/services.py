@@ -2,6 +2,7 @@
 
 from django.db import transaction
 from django.core.exceptions import ValidationError
+
 from apps.accounts.models import User, Role
 
 
@@ -20,8 +21,11 @@ class CustomerRegistrationService:
         first_name: str,
         last_name: str,
     ) -> User:
+
         if User.objects.filter(phone=phone).exists():
-            raise ValidationError({"phone": "A user with this phone number already exists."})
+            raise ValidationError(
+                {"phone": "A user with this phone number already exists."}
+            )
 
         user = User.objects.create_user(
             phone=phone,
@@ -31,6 +35,7 @@ class CustomerRegistrationService:
             role=Role.CUSTOMER,
             is_verified=False,
         )
+
         return user
 
 
@@ -49,12 +54,22 @@ class StaffRegistrationService:
         last_name: str,
         role: str,
     ) -> User:
-        allowed_roles = [Role.ADMIN, Role.OPS_STAFF, Role.MOVER]
+
+        allowed_roles = [
+            Role.ADMIN,
+            Role.OPS_STAFF,
+            Role.MOVER,
+        ]
+
         if role not in allowed_roles:
-            raise ValidationError({"role": f"Invalid staff role: {role}"})
+            raise ValidationError(
+                {"role": f"Invalid staff role: {role}"}
+            )
 
         if User.objects.filter(email=email).exists():
-            raise ValidationError({"email": "A user with this email already exists."})
+            raise ValidationError(
+                {"email": "A user with this email already exists."}
+            )
 
         user = User.objects.create_user(
             email=email,
@@ -65,4 +80,14 @@ class StaffRegistrationService:
             is_staff=(role == Role.ADMIN),
             is_verified=True,
         )
+
+        # Auto-create mover profile
+        if role == Role.MOVER:
+            from apps.operations.models import MoverProfile
+
+            MoverProfile.objects.create(
+                user=user,
+                phone=user.phone or "",
+            )
+
         return user
