@@ -114,3 +114,12 @@ SPECTACULAR_SETTINGS = {
 CELERY_BROKER_URL = env("REDIS_URL", default="redis://localhost:6379/0")
 CELERY_RESULT_BACKEND = env("REDIS_URL", default="redis://localhost:6379/0")
 CELERY_TIMEZONE = "Africa/Nairobi"
+
+# backend/config/settings/base.py  (additions)
+
+# M-Pesa Daraja
+MPESA_CONSUMER_KEY    = env("MPESA_CONSUMER_KEY", default="")
+MPESA_CONSUMER_SECRET = env("MPESA_CONSUMER_SECRET", default="")
+MPESA_SHORTCODE       = env("MPESA_SHORTCODE", default="174379")
+MPESA_PASSKEY         = env("MPESA_PASSKEY", default="")
+MPESA_CALLBACK_URL    = env("MPESA_CALLBACK_URL", default="https://example.com/api/payments/mpesa/callback/")
